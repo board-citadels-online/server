@@ -1,0 +1,50 @@
+plugins {
+    id "org.jetbrains.kotlin.jvm" version "1.2.61"
+    id "org.jetbrains.kotlin.plugin.spring" version "1.2.61"
+    id "io.franzbecker.gradle-lombok" version "1.14"
+    id "org.springframework.boot" version "2.0.4.RELEASE"
+    id "io.spring.dependency-management" version "1.0.6.RELEASE"
+}
+
+apply plugin: "kotlin"
+
+group "org.citadels"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+compileKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        freeCompilerArgs = ["-Xjsr305=strict"]
+        jvmTarget = "1.8"
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+    compile("org.jetbrains.kotlin:kotlin-reflect")
+
+    compile("org.springframework.boot:spring-boot-starter-webflux")
+    compile("org.springframework.boot:spring-boot-starter-integration")
+    compile("org.springframework.boot:spring-boot-starter-data-mongodb-reactive")
+    compile("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.security:spring-security-messaging")
+
+    compile('com.fasterxml.jackson.module:jackson-module-kotlin')
+
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = "4.9"
+}
